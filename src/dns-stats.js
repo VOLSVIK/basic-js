@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+// const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Given an array of domains, return the object with the appearances of the DNS.
@@ -22,9 +22,45 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  *
  */
-function getDNSStats(/* domains */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function getDNSStats(domains) {
+  if (domains.length == 0) {
+    return {}
+  } else {
+      let str = '', rezNN = 0, rezNNN = 0, arrRev = []
+  let rez = {}
+  domains.forEach((n, i) => {
+    rezNNN++
+    if (n.split('.').length == 3) {
+      str = '.' + n.split('.')[2];
+    } else {
+      if (n.split('.').length == 2) {
+        str = '.' + n.split('.')[1];
+      } else {
+        str = '.' + n.split('.')[0];
+      }
+    }
+    rez[str] = rezNNN
+      if (n.split('.').slice(1).length > 0 ) {
+        rezNN++
+        if (n.split('.').slice(1).length == 2) {
+          str = n.split('.').slice(1).join('.');
+        } else {
+          str = n.split('.').slice(0).join('.');
+        }
+        arrRev = '.' + str.split('.').reverse().join('.');
+        console.log(arrRev);
+        console.log(rezNN);
+        rez[arrRev] = rezNN
+        console.log(rez);
+      }
+      if (n.split('.').slice(2).length > 0 ) {
+        str = n.split('.').slice(0).join('.');
+        arrRev = '.' + str.split('.').reverse().join('.');
+        rez[arrRev] = 1
+      }
+  });
+  return rez
+  }
 }
 
 module.exports = {
