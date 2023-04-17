@@ -12,31 +12,18 @@
  * depthCalc.calculateDepth([[[]]]) => 3
  *
  */
- let n = 1, rez = 1
- function name(arr, n) {
-   console.log(arr);
-   for (let i = 0; i < arr.length; i++) {
-     if (Array.isArray(arr[i])) {
-       n++
-         // console.log(n + 'n==S');
-         // console.log(arr[i]);
-         name(arr[i], n)
-         // console.log(n + 'n==E');
-       n > rez ? rez = n : ''
-         // console.log(rez + '===!');
-       n--
-     }
-   }
-   return rez
- }
  class DepthCalculator {
- 
-   calculateDepth(arr) {
-     rez = 1
-     return name(arr, 1)
-   }
- 
- }
+  calculateDepth(arr) {
+    let rez = 1;
+    for (let i = 0; i < arr.length; i++) {
+      if (Array.isArray(arr[i])) {
+        let n = this.calculateDepth(arr[i]) + 1;
+        rez < n ? rez = n : ''
+      }
+    }
+    return rez
+  }
+}
 
 module.exports = {
   DepthCalculator

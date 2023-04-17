@@ -1,29 +1,53 @@
-const { NotImplementedError } = require('../extensions/index.js');
+// const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Implement chainMaker object according to task description
  * 
  */
-const chainMaker = {
+ const chainMaker = {
+
+  str: '',
+
   getLength() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    this.n = this.str.split('~~').length;
+    return this.n;
   },
-  addLink(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  addLink(value) {
+    // console.log(value)
+    if (value === undefined){
+    this.str.length == 0 ? this.str = this.str + '(  )' :
+    this.str = this.str + '~~(  )'
+    // console.log(this.str)
+    } else {
+    this.str.length == 0 ? this.str = this.str + '( ' + value + ' )' :
+    this.str = this.str + '~~( ' + value + ' )'
+    this.n = this.str.split('~~').length;
+    // console.log(this.str)
+  }
+  return this;
   },
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  removeLink(position) { 
+    // console.log(this.n)
+    // console.log(position)
+    if (!(position > 0 && position < this.n && Number.isInteger(position))) {
+      this.str = '';
+      throw new Error("You can't remove incorrect link!")
+    }
+    position = position - 1;
+    this.str = this.str.split('~~').slice(0, position).concat(this.str.split('~~').slice(position + 1)).join('~~');
+    this.n = this.str.split('~~').length;
+    return this;
   },
+  
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    this.str = this.str.split('~~').reverse().join('~~');
+    return this;
   },
+  
   finishChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    rez = this.str
+    this.str = '';
+    return rez;
   }
 };
 

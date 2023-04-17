@@ -12,14 +12,14 @@
  * 
  */
  function getSeason(date) {
-  // throw new NotImplementedError('Not implemented');
+  // throw new NotImplementedError('Not implemented');//????????????????
   let rez = ''
 if (date === undefined) {
   rez = 'Unable to determine the time of year!'
 } else {
   if (date instanceof Date) {
-    if (Object.prototype.toString.call(date) === 'Date') {
-      throw Error("Invalid date!")
+    if (Object.getOwnPropertyNames(date).length > 0) {
+      throw new Error('Invalid date!')
     } else {
       if (date.getMonth() > 10 || date.getMonth() < 2) {
         rez = 'winter'
@@ -38,7 +38,7 @@ if (date === undefined) {
     }
 
   } else {
-    throw Error("Invalid date!")
+    throw new Error('Invalid date!')
     // return 'Invalid date!'
   }
 }
